@@ -11,6 +11,7 @@ import com.github.tak8997.imagesearch.util.SchedulerProvider
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 @Module(includes = [AppModule.ProvideModule::class])
@@ -22,15 +23,21 @@ interface AppModule {
         @Provides
         @App
         fun provideContext(): Context = com.github.tak8997.imagesearch.App.instance
+
+        @Provides
+        @Singleton
+        fun provideCompositeDisposable(): CompositeDisposable {
+            return CompositeDisposable()
+        }
     }
 
     @Binds
     @Singleton
-    fun bindsWhistleRepository(repository: AppDataRepository): AppRepository
+    fun bindsAppRepository(repository: AppDataRepository): AppRepository
 
     @Binds
     @Singleton
-    fun bindSchedulerProvider(schedulerProvider: AppSchedulerProvider): SchedulerProvider
+    fun bindsSchedulerProvider(schedulerProvider: AppSchedulerProvider): SchedulerProvider
 
     @Binds
     fun bindsViewModelFactory(viewModelFactory: BaseViewModelFactory): ViewModelProvider.Factory

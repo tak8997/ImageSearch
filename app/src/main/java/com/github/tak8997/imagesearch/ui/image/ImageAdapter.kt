@@ -2,13 +2,21 @@ package com.github.tak8997.imagesearch.ui.image
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.github.tak8997.imagesearch.data.model.ImageItem
 import com.github.tak8997.imagesearch.databinding.ItemImageBinding
 
-class ImageAdapter : RecyclerView.Adapter<ImageViewHolder>() {
+class ImageAdapter : PagedListAdapter<ImageItem, ImageViewHolder>(object : DiffUtil.ItemCallback<ImageItem>() {
 
-    private val items = mutableListOf<ImageItem>()
+    override fun areItemsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean {
+        return oldItem.title == newItem.title
+    }
+
+    override fun areContentsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean {
+        return oldItem.title == newItem.title
+    }
+}) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         return ImageViewHolder(
@@ -16,9 +24,7 @@ class ImageAdapter : RecyclerView.Adapter<ImageViewHolder>() {
         )
     }
 
-    override fun getItemCount(): Int = items.count()
-
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
     }
 }

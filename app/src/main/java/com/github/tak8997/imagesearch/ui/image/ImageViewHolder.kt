@@ -6,7 +6,7 @@ import com.github.tak8997.imagesearch.databinding.ItemImageBinding
 
 class ImageViewHolder(private val binding: ItemImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: ImageItem) {
+    fun bind(item: ImageItem?) {
         binding.item = item
     }
 }
