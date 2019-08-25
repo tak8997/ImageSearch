@@ -1,7 +1,8 @@
-package com.github.tak8997.imagesearch
+package com.github.tak8997.imagesearch.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.github.tak8997.imagesearch.R
 
 class MainActivity : AppCompatActivity() {
 
