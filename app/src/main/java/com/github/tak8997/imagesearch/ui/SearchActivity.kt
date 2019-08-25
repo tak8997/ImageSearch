@@ -1,6 +1,8 @@
 package com.github.tak8997.imagesearch.ui
 
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tak8997.imagesearch.BaseActivity
 import com.github.tak8997.imagesearch.R
@@ -10,13 +12,21 @@ import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
 
-    private val imageAdapter = ImageAdapter()
+    private val imageAdapter by lazy {
+        ImageAdapter()
+    }
 
     override fun getModelClass(): Class<SearchViewModel> = SearchViewModel::class.java
     override fun getLayoutRes(): Int = R.layout.activity_search
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.run {
+            images.observe(this@SearchActivity, Observer {
+                Log.d("MY_LOG", "observe : ${it.config} ${it.count()}")
+                imageAdapter.submitList(it)
+            })
+        }
 
         setupRecycler()
     }
