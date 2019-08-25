@@ -1,6 +1,5 @@
 package com.github.tak8997.imagesearch.data.repository.paging
 
-import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.github.tak8997.imagesearch.data.ApiService
 import com.github.tak8997.imagesearch.data.model.ImageItem
@@ -14,7 +13,6 @@ class SearchDataSource(
 ) : PageKeyedDataSource<Int, ImageItem>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, ImageItem>) {
-        Log.d("MY_LOG", "loadInitial : ${params.requestedLoadSize}")
         apiService
             .search(keyword, params.requestedLoadSize)
             .subscribe({
@@ -24,7 +22,6 @@ class SearchDataSource(
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, ImageItem>) {
-        Log.d("MY_LOG", "loadAfter : ${params.requestedLoadSize}, ${params.key}}")
         apiService
             .search(keyword, params.key)
             .subscribe({
