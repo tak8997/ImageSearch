@@ -1,7 +1,6 @@
 package com.github.tak8997.imagesearch.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tak8997.imagesearch.BaseActivity
@@ -23,7 +22,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
         super.onCreate(savedInstanceState)
         viewModel.run {
             images.observe(this@SearchActivity, Observer {
-                Log.d("MY_LOG", "observe : ${it.config} ${it.count()}")
                 imageAdapter.submitList(it)
             })
         }
