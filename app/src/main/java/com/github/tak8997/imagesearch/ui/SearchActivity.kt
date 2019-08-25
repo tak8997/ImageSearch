@@ -1,6 +1,7 @@
 package com.github.tak8997.imagesearch.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.tak8997.imagesearch.BaseActivity
@@ -21,8 +22,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.run {
-            images.observe(this@SearchActivity, Observer {
+            pages.observe(this@SearchActivity, Observer {
                 imageAdapter.submitList(it)
+            })
+            networkState.observe(this@SearchActivity, Observer {
+                Toast.makeText(this@SearchActivity, it.msg, Toast.LENGTH_SHORT).show()
             })
         }
 

@@ -1,5 +1,6 @@
 package com.github.tak8997.imagesearch.data.repository.paging
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.github.tak8997.imagesearch.data.ApiService
 import com.github.tak8997.imagesearch.data.model.ImageItem
@@ -11,7 +12,11 @@ class SearchDataSourceFactory(
     private val disposables: CompositeDisposable
 ) : DataSource.Factory<Int, ImageItem>() {
 
+    val sourceLiveData = MutableLiveData<SearchDataSource>()
+
     override fun create(): DataSource<Int, ImageItem> {
-        return SearchDataSource(keyword, apiService, disposables)
+        val source = SearchDataSource(keyword, apiService, disposables)
+        sourceLiveData.postValue(source)
+        return source
     }
 }
