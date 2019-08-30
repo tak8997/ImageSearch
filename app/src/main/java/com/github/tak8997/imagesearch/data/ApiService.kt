@@ -10,6 +10,7 @@ interface ApiService {
     @GET("search/image")
     fun search(
         @Query("query") keyword: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("size") size: Int
     ) : Single<ImageSearchResponse>
 }
