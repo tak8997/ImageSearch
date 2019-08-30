@@ -31,7 +31,7 @@ class SearchDataSource(
         apiService
             .search(keyword, params.key)
             .subscribe({
-                callback.onResult(it.documents, params.requestedLoadSize)
+                callback.onResult(it.documents, params.key + 1)
             }, {
                 networkError.postValue(NetworkState.error(it.message))
             })
