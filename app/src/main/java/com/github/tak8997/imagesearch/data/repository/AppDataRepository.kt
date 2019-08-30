@@ -20,7 +20,7 @@ class AppDataRepository @Inject constructor(
 
         val config = PagedList.Config.Builder()
             .setPageSize(20)
-            .setInitialLoadSizeHint(40)
+            .setInitialLoadSizeHint(20)
             .setEnablePlaceholders(false)
             .build()
 
