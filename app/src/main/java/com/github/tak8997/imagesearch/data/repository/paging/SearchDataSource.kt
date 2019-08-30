@@ -18,7 +18,7 @@ class SearchDataSource(
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, ImageItem>) {
         apiService
-            .search(keyword, params.requestedLoadSize)
+            .search(keyword, 1)
             .subscribe({
                 callback.onResult(it.documents, null, 2)
             }, {
