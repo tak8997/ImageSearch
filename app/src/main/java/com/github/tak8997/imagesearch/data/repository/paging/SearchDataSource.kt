@@ -16,7 +16,10 @@ class SearchDataSource(
 
     val networkError = MutableLiveData<NetworkState>()
 
-    override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, ImageItem>) {
+    override fun loadInitial(
+        params: LoadInitialParams<Int>,
+        callback: LoadInitialCallback<Int, ImageItem>
+    ) {
         apiService
             .search(keyword, 1, params.requestedLoadSize)
             .subscribe({

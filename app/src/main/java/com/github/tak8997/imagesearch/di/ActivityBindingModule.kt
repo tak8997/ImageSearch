@@ -1,13 +1,13 @@
 package com.github.tak8997.imagesearch.di
 
-import com.github.tak8997.imagesearch.ui.SearchActivity
-import com.github.tak8997.imagesearch.di.module.MainModule
+import com.github.tak8997.imagesearch.ui.ImageSearchActivity
+import com.github.tak8997.imagesearch.di.module.ImageSearchModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityBindingModule {
 
-    @ContributesAndroidInjector(modules = [MainModule::class])
-    abstract fun mainActivity(): SearchActivity
+    @ContributesAndroidInjector(modules = [ImageSearchModule::class])
+    abstract fun mainActivity(): ImageSearchActivity
 }

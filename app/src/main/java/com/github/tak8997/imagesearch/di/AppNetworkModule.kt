@@ -34,7 +34,7 @@ interface AppNetworkModule {
 
                 val request = original.newBuilder()
                     .header("Authorization", "KakaoAK dd68a11e146ffc62946405a5fc466323")
-                    .method(original.method(), original.body())
+                    .method(original.method, original.body)
                     .build()
 
                 chain.proceed(request)
@@ -52,8 +52,7 @@ interface AppNetworkModule {
 
         @Singleton
         @Provides
-        fun retrofit(okHttpClient: OkHttpClient): Retrofit
-                = Retrofit.Builder()
+        fun retrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -62,6 +61,7 @@ interface AppNetworkModule {
 
         @Singleton
         @Provides
-        fun provideAppService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+        fun provideAppService(retrofit: Retrofit): ApiService =
+            retrofit.create(ApiService::class.java)
     }
 }

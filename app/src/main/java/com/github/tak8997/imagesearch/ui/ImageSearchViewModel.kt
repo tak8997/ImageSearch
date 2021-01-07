@@ -14,7 +14,7 @@ import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SearchViewModel @Inject constructor(
+class ImageSearchViewModel @Inject constructor(
     private val repository: AppRepository,
     private val disposables: CompositeDisposable
 ): ViewModel() {

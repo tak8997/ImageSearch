@@ -2,16 +2,16 @@ package com.github.tak8997.imagesearch.di.module
 
 import androidx.lifecycle.ViewModel
 import com.github.tak8997.imagesearch.di.key.ViewModelKey
-import com.github.tak8997.imagesearch.ui.SearchViewModel
+import com.github.tak8997.imagesearch.ui.ImageSearchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-interface MainModule {
+interface ImageSearchModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SearchViewModel::class)
-    fun bindsViewModel(viewModel: SearchViewModel): ViewModel
+    @ViewModelKey(ImageSearchViewModel::class)
+    fun bindsImageSearchViewModel(viewModel: ImageSearchViewModel): ViewModel
 }

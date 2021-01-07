@@ -1,15 +1,14 @@
 package com.github.tak8997.imagesearch
 
-import android.app.Activity
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.github.tak8997.imagesearch.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class App: Application(), HasActivityInjector {
+class App: Application(), HasAndroidInjector {
 
     companion object {
         lateinit var instance: App
@@ -17,9 +16,10 @@ class App: Application(), HasActivityInjector {
     }
 
     @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    lateinit var activityInjector: DispatchingAndroidInjector<Any>
 
-    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
+    override fun androidInjector(): AndroidInjector<Any> = activityInjector
+
     override fun onCreate() {
         super.onCreate()
         instance = this
