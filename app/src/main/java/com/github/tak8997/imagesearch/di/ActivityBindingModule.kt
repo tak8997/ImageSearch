@@ -1,6 +1,6 @@
 package com.github.tak8997.imagesearch.di
 
-import com.github.tak8997.imagesearch.ui.ImageSearchActivity
+import com.github.tak8997.imagesearch.presentation.ImageSearchActivity
 import com.github.tak8997.imagesearch.di.module.ImageSearchModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

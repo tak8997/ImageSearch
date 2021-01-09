@@ -1,4 +1,4 @@
-package com.github.tak8997.imagesearch.ui.image
+package com.github.tak8997.imagesearch.presentation.item
 
 import androidx.recyclerview.widget.RecyclerView
 import com.github.tak8997.imagesearch.data.model.ImageItem

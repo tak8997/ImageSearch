@@ -1,7 +1,7 @@
 package com.github.tak8997.imagesearch.di
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.github.tak8997.imagesearch.data.ApiService
+import com.github.tak8997.imagesearch.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor

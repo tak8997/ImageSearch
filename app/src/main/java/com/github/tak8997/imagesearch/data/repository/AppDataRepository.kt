@@ -1,36 +1,29 @@
 package com.github.tak8997.imagesearch.data.repository
 
-import androidx.lifecycle.Transformations
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import com.github.tak8997.imagesearch.data.ApiService
+import com.github.tak8997.imagesearch.data.local.LocalCache
 import com.github.tak8997.imagesearch.data.model.ImageItem
-import com.github.tak8997.imagesearch.data.repository.paging.SearchDataSourceFactory
+import com.github.tak8997.imagesearch.data.remote.ApiService
+import com.github.tak8997.imagesearch.util.SchedulerProvider
 import io.reactivex.Single
-import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class AppDataRepository @Inject constructor(
     private val apiService: ApiService,
-    private val disposables: CompositeDisposable
-): AppRepository {
+    private val localCache: LocalCache,
+    private val schedulerProvider: SchedulerProvider
+) : AppRepository {
 
-    override fun search(keyword: String): Single<Listing<ImageItem>> {
-        val dataSourceFactory = SearchDataSourceFactory(keyword, apiService, disposables)
+    override fun search(query: String): Single<List<ImageItem>> {
+        return apiService.search(query)
+            .map { it.images }
+            .doOnSuccess(localCache::saveImages)
+            .subscribeOn(schedulerProvider.io())
+    }
 
-        val config = PagedList.Config.Builder()
-            .setPageSize(20)
-            .setInitialLoadSizeHint(20)
-            .setEnablePlaceholders(false)
-            .build()
-
-        val networkError = Transformations.switchMap(dataSourceFactory.sourceLiveData) {
-            it.networkError
-        }
-
-        return Single.just(Listing(
-            LivePagedListBuilder(dataSourceFactory, config).build(),
-            networkError
-        ))
+    override fun getFilteredImages(filter: String): Single<List<ImageItem>> {
+        return localCache.getSavedImages()
+            .map { images ->
+                images.filter { it.filter == filter }
+            }
     }
 }

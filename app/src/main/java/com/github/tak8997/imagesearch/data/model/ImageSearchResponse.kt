@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class ImageSearchResponse(
     val meta: Meta,
-    val documents: List<ImageItem>
+    @SerializedName("documents")
+    val images: List<ImageItem>
 )
 
 data class Meta(
@@ -14,9 +15,12 @@ data class Meta(
 )
 
 data class ImageItem(
+    @SerializedName("collection") val filter: String,
     @SerializedName("thumbnail_url") val thumbnailUrl: String,
     @SerializedName("image_url") val imageUrl: String,
-    val width: Int,
-    val height: Int,
     @SerializedName("display_sitename") val title: String
 )
+
+fun List<ImageItem>.getFilters(): List<String> {
+    return map { it.filter }
+}
