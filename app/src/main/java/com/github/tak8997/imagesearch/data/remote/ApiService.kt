@@ -8,5 +8,5 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("search/image")
-    fun search(@Query("query") keyword: String): Single<ImageSearchResponse>
+    fun search(@Query("query") query: String): Single<ImageSearchResponse>
 }
